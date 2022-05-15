@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateAchievementsTable extends Migration
 {
@@ -19,6 +20,19 @@ class CreateAchievementsTable extends Migration
             $table->string('achievements_slug',100);
             $table->timestamps();
         });
+
+        DB::table('achievements')->insert(
+            [
+                [
+                    'achievements_name' => 'Lessons Watched Achievement',
+                    'achievements_slug' => 'lesson'
+                ],
+                [
+                    'achievements_name' => 'Comments Written Achievement',
+                    'achievements_slug' => 'comment'
+                ]
+            ]
+        );
     }
 
     /**
