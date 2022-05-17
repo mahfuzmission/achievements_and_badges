@@ -8,9 +8,12 @@ Route::get('/users/{user}/achievements', [AchievementsController::class, 'index'
 
 Route::get('/', function (){
 
-    $user = \App\Models\User::factory()->create();
+    $user = \App\Models\User::find(1);
 
-    $data = [];
+    if(empty($user))
+    {
+        $user = \App\Models\User::factory()->create();
+    }
 
     $comment = \App\Models\Comment::create([
         'body' => "This is my first comment",

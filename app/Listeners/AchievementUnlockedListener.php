@@ -4,10 +4,6 @@ namespace App\Listeners;
 
 use App\Events\AchievementUnlocked;
 use App\Events\BadgeUnlocked;
-use App\Models\Achievement;
-use App\Models\Badge;
-use App\Models\UserAchievement;
-use App\Models\UserAchievementHistory;
 use App\Service\Achievement\AchievementService;
 use App\Service\Badge\BadgeService;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -78,10 +74,11 @@ class AchievementUnlockedListener
                 ]
             );
 
-            $next_badge = BadgeService::getBadge($badge_id + 1, $total_achievement);
+            $next_badge = BadgeService::getBadgeByPoint($total_achievement);
 
-            if(!empty($next_badge))
+            if(!empty($next_badge) && $next_badge->id > $badge_id)
             {
+                Log::info("Achievement Unlocked Listener - new badge unlocked");
                 event(new BadgeUnlocked($next_badge->badge_slug, $event->user));
             }
 

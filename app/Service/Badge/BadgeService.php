@@ -13,12 +13,16 @@ class BadgeService
     }
 
 
-    public static function getBadge($badge_id, $total_achievement=null)
+    public static function getBadgeByID($badge_id)
     {
-        return Badge::where('id',$badge_id)
-            ->when( ($total_achievement == null), function ($query, $total_achievement) {
-                return $query->where('achievement_required', '<=', $total_achievement);
-            })
+        return Badge::find($badge_id);
+    }
+
+
+    public static function getBadgeByPoint($total_achievement)
+    {
+        return Badge::where('achievement_required', '<=', $total_achievement)
+            ->orderBy('id','desc')
             ->first();
     }
 

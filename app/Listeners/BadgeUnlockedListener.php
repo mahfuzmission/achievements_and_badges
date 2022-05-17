@@ -3,12 +3,11 @@
 namespace App\Listeners;
 
 use App\Events\BadgeUnlocked;
-use App\Models\Badge;
-use App\Models\UserAchievement;
 use App\Service\Achievement\AchievementService;
 use App\Service\Badge\BadgeService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 
 class BadgeUnlockedListener
 {
@@ -31,13 +30,22 @@ class BadgeUnlockedListener
      */
     public function handle(BadgeUnlocked $event)
     {
+        Log::info("Badge Unlocked Listener ended");
+
         $badge = BadgeService::getBadgeBySlug($event->badge_slug);
 
-        AchievementService::updateUserAchievement($event->user->id,
-            [
-                'badge_id' => $badge->id
-            ]
-        );
+        if(! empty($badge))
+        {
+            Log::info("Badge Unlocked Listener - badge updated : user_id".$event->user->id." badge_id : ".$badge->id);
+
+            AchievementService::updateUserAchievement($event->user->id,
+                [
+                    'badge_id' => $badge->id
+                ]
+            );
+        }
+
+        Log::info("Badge Unlocked Listener ended");
     }
 
 
