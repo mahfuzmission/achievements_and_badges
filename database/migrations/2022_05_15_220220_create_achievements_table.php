@@ -18,7 +18,7 @@ class CreateAchievementsTable extends Migration
             $table->id();
             $table->enum('type', ['lesson','comment']);
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->index();
             $table->integer('need_to_complete');
             $table->integer('earn_achievement');
             $table->boolean('status')->default('1');

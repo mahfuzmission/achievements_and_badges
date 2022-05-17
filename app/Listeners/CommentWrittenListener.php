@@ -4,9 +4,7 @@ namespace App\Listeners;
 
 use App\Events\AchievementUnlocked;
 use App\Events\CommentWritten;
-use App\Service\AchievementService;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Service\Achievement\AchievementService;
 use Illuminate\Support\Facades\Log;
 
 class CommentWrittenListener
