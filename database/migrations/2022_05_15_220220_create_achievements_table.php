@@ -16,20 +16,77 @@ class CreateAchievementsTable extends Migration
     {
         Schema::create('achievements', function (Blueprint $table) {
             $table->id();
-            $table->string('achievements_name',100);
-            $table->string('achievements_slug',100);
+            $table->enum('type', ['lesson','comment']);
+            $table->string('name');
+            $table->string('slug');
+            $table->integer('need_to_complete');
+            $table->integer('earn_achievement');
+            $table->boolean('status')->default('1');
             $table->timestamps();
+
         });
 
         DB::table('achievements')->insert(
             [
                 [
-                    'achievements_name' => 'Lessons Watched Achievement',
-                    'achievements_slug' => 'lesson'
+                    'type' => 'lesson',
+                    'name' => 'First Lesson Watched',
+                    'need_to_complete' => 1,
+                    'earn_achievement' => 1,
                 ],
                 [
-                    'achievements_name' => 'Comments Written Achievement',
-                    'achievements_slug' => 'comment'
+                    'type' => 'lesson',
+                    'name' => '5 Lessons Watched',
+                    'need_to_complete' => 5,
+                    'earn_achievement' => 1,
+                ],
+                [
+                    'type' => 'lesson',
+                    'name' => '10 Lessons Watched',
+                    'need_to_complete' => 10,
+                    'earn_achievement' => 1,
+                ],
+                [
+                    'type' => 'lesson',
+                    'name' => '25 Lessons Watched',
+                    'need_to_complete' => 25,
+                    'earn_achievement' => 1
+                ],
+                [
+                    'type' => 'lesson',
+                    'name' => '50 Lessons Watched',
+                    'need_to_complete' => 50,
+                    'earn_achievement' => 1
+                ],
+                [
+                    'type' => 'comment',
+                    'name' => 'First Comment Written',
+                    'need_to_complete' => 1,
+                    'earn_achievement' => 1
+                ],
+                [
+                    'type' => 'comment',
+                    'name' => '3 Comments Written',
+                    'need_to_complete' => 3,
+                    'earn_achievement' => 1
+                ],
+                [
+                    'type' => 'comment',
+                    'name' => '5 Comments Written',
+                    'need_to_complete' => 5,
+                    'earn_achievement' => 1
+                ],
+                [
+                    'type' => 'comment',
+                    'name' => '10 Comment Written',
+                    'need_to_complete' => 10,
+                    'earn_achievement' => 1
+                ],
+                [
+                    'type' => 'comment',
+                    'name' => '20 Comment Written',
+                    'need_to_complete' => 20,
+                    'earn_achievement' => 1
                 ]
             ]
         );

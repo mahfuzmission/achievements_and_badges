@@ -5,6 +5,7 @@ namespace App\Listeners;
 use App\Events\AchievementUnlocked;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 
 class AchievementUnlockedListener
 {
@@ -21,11 +22,11 @@ class AchievementUnlockedListener
     /**
      * Handle the event.
      *
-     * @param  \App\Events\AchievementUnlocked  $event
+     * @param AchievementUnlocked $event
      * @return void
      */
     public function handle(AchievementUnlocked $event)
     {
-        //
+        Log::info("Achievement Unlocked Listener fired");
     }
 }
