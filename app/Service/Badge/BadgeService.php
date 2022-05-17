@@ -7,13 +7,13 @@ use App\Models\Badge;
 class BadgeService
 {
 
-    public function getBadgeBySlug($badge_slug)
+    public static function getBadgeBySlug($badge_slug)
     {
         return Badge::where('badge_slug', $badge_slug )->first();
     }
 
 
-    public function getBadge($badge_id, $total_achievement=null)
+    public static function getBadge($badge_id, $total_achievement=null)
     {
         return Badge::where('id',$badge_id)
             ->when( ($total_achievement == null), function ($query, $total_achievement) {

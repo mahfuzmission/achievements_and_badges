@@ -23,8 +23,7 @@ class AchievementUnlockedListener
      */
     public function __construct()
     {
-        $this->badge_service = new BadgeService();
-        $this->achievement_service = new AchievementService();
+        //
     }
 
     /**
@@ -37,12 +36,12 @@ class AchievementUnlockedListener
     {
         Log::info("Achievement Unlocked Listener started.");
 
-        $achievement = $this->achievement_service->getAchievementBySlug($event->achievement_name);
+        $achievement = AchievementService::getAchievementBySlug($event->achievement_name);
 
         if(! empty($achievement))
         {
             Log::info("Achievement Unlocked Listener - achievement name : ".$achievement->name);
-            $user_achievement = $this->achievement_service->getUserAchievement($event->user->id);
+            $user_achievement = AchievementService::getUserAchievement($event->user->id);
             $badge_id = $user_achievement->badge_id ?? 1;
             $total_achievement = 0;
 
@@ -50,7 +49,7 @@ class AchievementUnlockedListener
             {
                 Log::info("Achievement Unlocked Listener - achievement user created user_id : ".$event->user->id);
                 $total_achievement = $achievement->earn_achievement;
-                $this->achievement_service->createUserAchievement(
+                AchievementService::createUserAchievement(
                     [
                         'user_id' => $event->user->id,
                         'badge_id' => $badge_id,
@@ -62,14 +61,14 @@ class AchievementUnlockedListener
             {
                 Log::info("Achievement Unlocked Listener - achievement user updated user_id : ".$event->user->id);
                 $total_achievement = $user_achievement->total_earned_achievement + $achievement->earn_achievement;
-                $this->achievement_service->updateUserAchievement($event->user->id,
+                AchievementService::updateUserAchievement($event->user->id,
                     [
                         'total_earned_achievement' => $total_achievement
                     ]
                 );
             }
 
-            $this->achievement_service->createUserAchievementHistory(
+            AchievementService::createUserAchievementHistory(
                 [
                     'user_id' => $event->user->id,
                     'achievement_type' => $achievement->type,
@@ -79,7 +78,7 @@ class AchievementUnlockedListener
                 ]
             );
 
-            $next_badge = $this->badge_service->getBadge($badge_id + 1, $total_achievement);
+            $next_badge = BadgeService::getBadge($badge_id + 1, $total_achievement);
 
             if(!empty($next_badge))
             {

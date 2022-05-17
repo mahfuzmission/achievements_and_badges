@@ -13,9 +13,6 @@ use Illuminate\Queue\InteractsWithQueue;
 class BadgeUnlockedListener
 {
 
-    private $badge_service;
-    private $achievement_service;
-
     /**
      * Create the event listener.
      *
@@ -23,8 +20,7 @@ class BadgeUnlockedListener
      */
     public function __construct()
     {
-        $this->badge_service = new BadgeService();
-        $this->achievement_service = new AchievementService();
+        //
     }
 
     /**
@@ -35,9 +31,9 @@ class BadgeUnlockedListener
      */
     public function handle(BadgeUnlocked $event)
     {
-        $badge = $this->badge_service->getBadgeBySlug($event->badge_slug);
+        $badge = BadgeService::getBadgeBySlug($event->badge_slug);
 
-        $this->achievement_service->updateUserAchievement($event->user->id,
+        AchievementService::updateUserAchievement($event->user->id,
             [
                 'badge_id' => $badge->id
             ]
