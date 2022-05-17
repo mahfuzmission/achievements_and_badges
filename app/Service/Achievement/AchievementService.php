@@ -11,31 +11,23 @@ use App\Models\UserAchievementHistory;
 class AchievementService
 {
 
-    public static function getUser($user_id)
+    public static function getAchievement($task_need_to_complete, $type)
     {
-        return User::find($user_id);
-//        return User::with(['achievement'])->find($user_id) ;
+        return Achievement::where('type', $type)
+            ->where('need_to_complete', '=', $task_need_to_complete)
+            ->first();
     }
 
 
-    public static function getTotalCommentCount($user_id)
+    public static function getAchievementBySlug($slug)
     {
-        return Comment::where('user_id',$user_id)
-            ->count();
+        return Achievement::where('slug', $slug)->first();
     }
 
 
     public static function getUserAchievement($user_id)
     {
         return UserAchievement::where('user_id', $user_id)
-            ->first();
-    }
-
-
-    public static function getAchievement($task_need_to_complete, $type)
-    {
-        return Achievement::where('type', $type)
-            ->where('need_to_complete', '=', $task_need_to_complete)
             ->first();
     }
 
@@ -56,12 +48,5 @@ class AchievementService
     {
         UserAchievementHistory::create($history);
     }
-
-
-    public static function getAchievementBySlug($slug)
-    {
-        return Achievement::where('slug', $slug)->first();
-    }
-
 
 }
