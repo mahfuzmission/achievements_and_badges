@@ -31,8 +31,8 @@ class LessonWatchedListener
     {
         Log::info("Lesson Watched Listener started ");
 
-        $total_lesson__count = $event->user->watched()->count();
-        $next_achievement = AchievementService::getAchievement($total_lesson__count, 'lesson');
+        $total_lesson_count = $event->user->watched()->count();
+        $next_achievement = AchievementService::getAchievement($total_lesson_count, 'lesson');
 
         if(! empty($next_achievement)  )
         {

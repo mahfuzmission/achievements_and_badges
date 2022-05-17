@@ -24,7 +24,7 @@ class CommentFactory extends Factory
     {
         return [
             'body' => $this->faker->text(),
-            'user_id' => User::factory(),
+            'user_id' => (User::all()->count()) ? (User::all()->random()->id) : User::factory(),
         ];
     }
 }
