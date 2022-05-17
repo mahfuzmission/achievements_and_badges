@@ -31,60 +31,70 @@ class CreateAchievementsTable extends Migration
                 [
                     'type' => 'lesson',
                     'name' => 'First Lesson Watched',
+                    'slug' => 'one_lesson',
                     'need_to_complete' => 1,
                     'earn_achievement' => 1,
                 ],
                 [
                     'type' => 'lesson',
                     'name' => '5 Lessons Watched',
+                    'slug' => 'five_lesson',
                     'need_to_complete' => 5,
                     'earn_achievement' => 1,
                 ],
                 [
                     'type' => 'lesson',
                     'name' => '10 Lessons Watched',
+                    'slug' => 'ten_lesson',
                     'need_to_complete' => 10,
                     'earn_achievement' => 1,
                 ],
                 [
                     'type' => 'lesson',
                     'name' => '25 Lessons Watched',
+                    'slug' => 'twenty_five_lesson',
                     'need_to_complete' => 25,
                     'earn_achievement' => 1
                 ],
                 [
                     'type' => 'lesson',
                     'name' => '50 Lessons Watched',
+                    'slug' => 'fifty_lesson',
                     'need_to_complete' => 50,
                     'earn_achievement' => 1
                 ],
                 [
                     'type' => 'comment',
                     'name' => 'First Comment Written',
+                    'slug' => 'one_comment',
                     'need_to_complete' => 1,
                     'earn_achievement' => 1
                 ],
                 [
                     'type' => 'comment',
                     'name' => '3 Comments Written',
+                    'slug' => 'three_comment',
                     'need_to_complete' => 3,
                     'earn_achievement' => 1
                 ],
                 [
                     'type' => 'comment',
                     'name' => '5 Comments Written',
+                    'slug' => 'five_comment',
                     'need_to_complete' => 5,
                     'earn_achievement' => 1
                 ],
                 [
                     'type' => 'comment',
                     'name' => '10 Comment Written',
+                    'slug' => 'ten_comment',
                     'need_to_complete' => 10,
                     'earn_achievement' => 1
                 ],
                 [
                     'type' => 'comment',
                     'name' => '20 Comment Written',
+                    'slug' => 'twenty_comment',
                     'need_to_complete' => 20,
                     'earn_achievement' => 1
                 ]

@@ -11,4 +11,12 @@ class UserAchievementHistory extends Model
 
 
     protected $table = "user_achievement_history";
+
+    protected $fillable = [
+        'user_id',
+        'achievement_type',
+        'achievement_name',
+        'achievement_slug',
+        'earn_achievement'
+    ];
 }

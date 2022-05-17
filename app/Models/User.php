@@ -64,4 +64,13 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Lesson::class)->wherePivot('watched', true);
     }
+
+    /**
+     * The achievement that a user has.
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function achievement()
+    {
+        return $this->hasOne(UserAchievement::class);
+    }
 }

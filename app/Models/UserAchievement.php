@@ -11,4 +11,10 @@ class UserAchievement extends Model
 
 
     protected $table = "user_achievements";
+
+    protected $fillable = [
+        'user_id',
+        'badge_id',
+        'total_earned_achievement',
+    ];
 }
