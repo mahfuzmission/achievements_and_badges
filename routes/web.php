@@ -14,22 +14,20 @@ Route::get('/', function (){
         $user = \App\Models\User::factory()->create();
     }
 
-//    $data['lesson'] = \App\Models\Lesson::factory()->count(10)->create();
-//
-//    foreach ($data['lesson'] as $lesson)
-//    {
-//        \Illuminate\Support\Facades\DB::table('lesson_user')->insert([
-//            'watched' => 1,
-//            'lesson_id' => $lesson->id,
-//            'user_id' => $user->id,
-//        ]);
-//
-//        event(new \App\Events\LessonWatched($lesson, $user));
-//    }
+    $data['lesson'] = \App\Models\Lesson::factory()->count(50)->create();
 
-//        $data['comment'] = \App\Models\Comment::factory()->count(20)->create();
+    foreach ($data['lesson'] as $lesson)
+    {
+        \Illuminate\Support\Facades\DB::table('lesson_user')->insert([
+            'watched' => 1,
+            'lesson_id' => $lesson->id,
+            'user_id' => $user->id,
+        ]);
 
-    for($i = 0; $i <= 20; $i++)
+        event(new \App\Events\LessonWatched($lesson, $user));
+    }
+
+    for($i = 0; $i <= 1; $i++)
     {
         $comment = \App\Models\Comment::create([
             'body' => "This is my $i comment",
@@ -41,5 +39,5 @@ Route::get('/', function (){
     }
 
 
-    return response()->json(["data" => $data]);
+    return response()->json(["data" => $data ?? "none"]);
 });

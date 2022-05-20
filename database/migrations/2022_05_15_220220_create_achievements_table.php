@@ -86,14 +86,14 @@ class CreateAchievementsTable extends Migration
                 ],
                 [
                     'type' => 'comment',
-                    'name' => '10 Comment Written',
+                    'name' => '10 Comments Written',
                     'slug' => 'ten_comment',
                     'need_to_complete' => 10,
                     'earn_achievement' => 1
                 ],
                 [
                     'type' => 'comment',
-                    'name' => '20 Comment Written',
+                    'name' => '20 Comments Written',
                     'slug' => 'twenty_comment',
                     'need_to_complete' => 20,
                     'earn_achievement' => 1
