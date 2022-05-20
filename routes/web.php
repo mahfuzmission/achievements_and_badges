@@ -7,13 +7,13 @@ Route::get('/users/{user}/achievements', [AchievementsController::class, 'index'
 
 Route::get('/', function (){
 
-    $user = \App\Models\User::find(1);
-
-    if(empty($user))
-    {
-        $user = \App\Models\User::factory()->create();
-    }
-
+//    $user = \App\Models\User::find(1);
+//
+//    if(empty($user))
+//    {
+//        $user = \App\Models\User::factory()->create();
+//    }
+//
 //    $data['lesson'] = \App\Models\Lesson::factory()->count(50)->create();
 //
 //    foreach ($data['lesson'] as $lesson)

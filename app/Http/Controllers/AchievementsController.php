@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Achievement;
 use App\Models\Badge;
 use App\Models\User;
-use App\Models\UserAchievement;
 use App\Models\UserAchievementHistory;
-use Illuminate\Http\Request;
 
 class AchievementsController extends Controller
 {
