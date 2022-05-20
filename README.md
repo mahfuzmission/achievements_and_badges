@@ -6,7 +6,7 @@
 
 - PHP >= 7.3
 - Laravel 8
-- Database: MySql( 8.0.28), MariaDB(10.4.22) (will run with lower versions as well because only basic concepts)
+- Database: MySql( 8.0.28), MariaDB(10.4.22) (will run with lower versions as well)
 - Composer 2
 
 ## Environment Setup
