@@ -3,8 +3,6 @@
 namespace App\Service\Achievement;
 
 use App\Models\Achievement;
-use App\Models\Comment;
-use App\Models\User;
 use App\Models\UserAchievement;
 use App\Models\UserAchievementHistory;
 

@@ -32,11 +32,34 @@ class AchievementAndBadgeEventTest extends TestCase
         }
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
+    public function test_noAchievementEarnedByUser()
+    {
+        $user = self::$user;
+
+        $response = $this->get("/users/$user->id/achievements");
+        $response->assertExactJson(
+            [
+                "unlocked_achievements" => [
+                ],
+                "next_available_achievements" => [
+                    "First Lesson Watched",
+                    "5 Lessons Watched",
+                    "10 Lessons Watched",
+                    "25 Lessons Watched",
+                    "50 Lessons Watched",
+                    "First Comment Written",
+                    "3 Comments Written",
+                    "5 Comments Written",
+                    "10 Comments Written",
+                    "20 Comments Written"
+                ],
+                "current_badge" => "Beginner",
+                "next_badge" => "Intermediate",
+                "remaing_to_unlock_next_badge" => 4
+            ]
+        );
+    }
+
     public function test_firstAchievementByLesson()
     {
         $user = self::$user;

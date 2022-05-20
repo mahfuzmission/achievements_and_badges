@@ -3,9 +3,7 @@
 namespace App\Listeners;
 
 use App\Events\AchievementUnlocked;
-use App\Events\BadgeUnlocked;
-use App\Service\Achievement\AchievementService;
-use App\Service\Badge\BadgeService;
+use App\Service\Achievement\AchievementUnlockedListenerService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -32,57 +30,7 @@ class AchievementUnlockedListener
     {
         Log::info("Achievement Unlocked Listener started.");
 
-        $achievement = AchievementService::getAchievementBySlug($event->achievement_name);
-
-        if(! empty($achievement))
-        {
-            Log::info("Achievement Unlocked Listener - achievement name : ".$achievement->name);
-            $user_achievement = AchievementService::getUserAchievement($event->user->id);
-            $badge_id = $user_achievement->badge_id ?? 1;
-            $total_achievement = 0;
-
-            if(empty($user_achievement))
-            {
-                Log::info("Achievement Unlocked Listener - achievement user created user_id : ".$event->user->id);
-                $total_achievement = $achievement->earn_achievement;
-                AchievementService::createUserAchievement(
-                    [
-                        'user_id' => $event->user->id,
-                        'badge_id' => $badge_id,
-                        'total_earned_achievement' => $total_achievement
-                    ]
-                );
-            }
-            else
-            {
-                Log::info("Achievement Unlocked Listener - achievement user updated user_id : ".$event->user->id);
-                $total_achievement = $user_achievement->total_earned_achievement + $achievement->earn_achievement;
-                AchievementService::updateUserAchievement($event->user->id,
-                    [
-                        'total_earned_achievement' => $total_achievement
-                    ]
-                );
-            }
-
-            AchievementService::createUserAchievementHistory(
-                [
-                    'user_id' => $event->user->id,
-                    'achievement_type' => $achievement->type,
-                    'achievement_name' => $achievement->name,
-                    'achievement_slug' => $achievement->slug,
-                    'earn_achievement' => $achievement->earn_achievement
-                ]
-            );
-
-            $next_badge = BadgeService::getBadgeByPoint($total_achievement);
-
-            if(!empty($next_badge) && $next_badge->id > $badge_id)
-            {
-                Log::info("Achievement Unlocked Listener - new badge unlocked");
-                event(new BadgeUnlocked($next_badge->badge_slug, $event->user));
-            }
-
-        }
+        AchievementUnlockedListenerService::achievementUnlockedListener($event->achievement_name, $event->user);
 
         Log::info("Achievement Unlocked Listener ended");
     }

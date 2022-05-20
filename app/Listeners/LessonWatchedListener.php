@@ -2,9 +2,8 @@
 
 namespace App\Listeners;
 
-use App\Events\AchievementUnlocked;
 use App\Events\LessonWatched;
-use App\Service\Achievement\AchievementService;
+use App\Service\Lesson\LessonListenerService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -31,14 +30,7 @@ class LessonWatchedListener
     {
         Log::info("Lesson Watched Listener started ");
 
-        $total_lesson_count = $event->user->watched()->count();
-        $next_achievement = AchievementService::getAchievement($total_lesson_count, 'lesson');
-
-        if(! empty($next_achievement)  )
-        {
-            Log::info("Lesson Watched Listener - new achievement found");
-            event(new AchievementUnlocked($next_achievement->slug, $event->user));
-        }
+        LessonListenerService::lessonListener($event->lesson, $event->user);
 
         Log::info("Lesson Watched Listener ended");
     }
